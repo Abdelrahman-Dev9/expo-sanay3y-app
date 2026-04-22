@@ -1,3 +1,4 @@
+import { useSSO } from "@clerk/expo";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
@@ -95,8 +96,34 @@ export default function SignupScreen() {
     }
   };
 
-  const handleGoogle = () => console.log("Google Sign In");
-  const handleApple = () => console.log("Apple Sign In");
+  const { startSSOFlow } = useSSO();
+
+  const handleGoogle = async () => {
+    try {
+      const { createdSessionId, setActive } = await startSSOFlow({
+        strategy: "oauth_google",
+      });
+
+      if (createdSessionId) {
+        await setActive?.({ session: createdSessionId });
+      }
+    } catch (err) {
+      console.log("Google error:", err);
+    }
+  };
+  const handleApple = async () => {
+    try {
+      const { createdSessionId, setActive } = await startSSOFlow({
+        strategy: "oauth_apple",
+      });
+
+      if (createdSessionId) {
+        await setActive?.({ session: createdSessionId });
+      }
+    } catch (err) {
+      console.log("Apple error:", err);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
