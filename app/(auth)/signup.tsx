@@ -1,6 +1,7 @@
 import { useSSO } from "@clerk/expo";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -107,6 +108,7 @@ export default function SignupScreen() {
       if (createdSessionId) {
         await setActive?.({ session: createdSessionId });
       }
+      router.push("/(tabs)/second");
     } catch (err) {
       console.log("Google error:", err);
     }
@@ -120,6 +122,7 @@ export default function SignupScreen() {
       if (createdSessionId) {
         await setActive?.({ session: createdSessionId });
       }
+      router.push("/(tabs)/second");
     } catch (err) {
       console.log("Apple error:", err);
     }
@@ -147,7 +150,7 @@ export default function SignupScreen() {
           </View>
 
           {/* Form */}
-          <View className="mx-6 bg-white rounded-3xl p-4 py-10">
+          <View className="mx-6 bg-white rounded-3xl p-4 py-10 ">
             {/* Full Name */}
             <View className="mb-6">
               <Text className="font-semibold mb-3">Full Name</Text>
@@ -287,6 +290,19 @@ export default function SignupScreen() {
               >
                 <Ionicons name="logo-apple" size={20} color="white" />
                 <Text className="ml-2 font-semibold text-white">Apple</Text>
+              </TouchableOpacity>
+            </View>
+            <View className="flex-row justify-between mt-10">
+              <Text className="font-bold text-[16px]">
+                Already have an account?
+              </Text>
+              <TouchableOpacity
+                onPress={() => router.push("/(auth)/login")}
+                className="text-teal-900"
+              >
+                <Text className="text-teal-900 text-[15px] font-semibold">
+                  Login
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

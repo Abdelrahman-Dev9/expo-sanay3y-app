@@ -9,7 +9,7 @@ export default function SettingsScreen() {
     try {
       await signOut();
       console.log("Logged out successfully");
-      router.push("/(auth)/signup");
+      router.push("/(auth)/login");
       // optionally navigate to login screen
     } catch (error) {
       console.log("Logout error:", error);
@@ -17,13 +17,18 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <TouchableOpacity
-        onPress={handleLogout}
-        className="bg-red-500 px-6 py-3 rounded-full"
-      >
-        <Text className="text-white font-bold">Logout</Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      <View>
+        <Text>welcome user</Text>
+      </View>
+      <View className="flex-1 items-center justify-center">
+        <TouchableOpacity
+          onPress={handleLogout}
+          className="bg-red-500 px-6 py-3 rounded-full"
+        >
+          <Text className="text-white font-bold">Logout</Text>
+        </TouchableOpacity>
+      </View>
+    </>
   );
 }
