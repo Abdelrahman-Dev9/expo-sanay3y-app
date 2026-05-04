@@ -17,6 +17,8 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { z } from "zod";
 import { useForgetPasswordMutation } from "../src/services/authApi";
+import { useDispatch } from "react-redux";
+import { setResetToken } from "../src/store/authSlice";
 
 const forgotPasswordSchema = z.object({
   email: z
@@ -32,6 +34,7 @@ export default function ForgotPasswordScreen() {
 
   // ❗ use RTK loading instead of manual state
   const [forgetPassword, { isLoading }] = useForgetPasswordMutation();
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -46,13 +49,12 @@ export default function ForgotPasswordScreen() {
       const res = await forgetPassword({
         email: data.email.trim(),
       }).unwrap();
-
-      console.log(res.token);
+      dispatch(setResetToken(res.token));
 
       Alert.alert(res?.message || "If this email exists, a code was sent");
 
       // optional navigation (keep or remove)
-      // router.push("/verify-code");
+      router.push("/(auth)/verificationCode");
     } catch (err: any) {
       console.log(err);
 
