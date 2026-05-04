@@ -114,12 +114,6 @@ const Login = () => {
       console.log("Apple error:", err);
     }
   };
-
-  const handleForgotPassword = () => {
-    console.log("Navigate to forgot password screen");
-    // router.push('/forgot-password');
-  };
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -134,8 +128,8 @@ const Login = () => {
           {/* Header */}
           <View className="px-6 pt-6 pb-8">
             <View className="flex-row items-center gap-2">
-              <View className="w-10 h-10 bg-teal-700 rounded-lg justify-center items-center">
-                <Text className="text-white font-bold text-lg">↑</Text>
+              <View className="items-center justify-center w-10 h-10 bg-teal-700 rounded-lg">
+                <Text className="text-lg font-bold text-white">↑</Text>
               </View>
               <Text className="text-xl font-bold">
                 <Text className="text-gray-900">ProLink</Text>
@@ -145,20 +139,20 @@ const Login = () => {
           </View>
 
           {/* Form Card */}
-          <View className="mx-4 bg-white rounded-3xl px-6 py-8 mb-6">
+          <View className="px-6 py-8 mx-4 mb-6 bg-white rounded-3xl">
             {/* Welcome Section */}
             <View className="mb-8">
-              <Text className="text-4xl font-bold text-gray-900 mb-3">
+              <Text className="mb-3 text-4xl font-bold text-gray-900">
                 Welcome Back
               </Text>
-              <Text className="text-gray-600 text-base leading-6">
+              <Text className="text-base leading-6 text-gray-600">
                 Please enter your details to access the marketplace.
               </Text>
             </View>
 
             {/* Email or Phone Input */}
             <View className="mb-6">
-              <Text className="text-gray-900 font-semibold mb-3">
+              <Text className="mb-3 font-semibold text-gray-900">
                 Email or Phone
               </Text>
               <Controller
@@ -190,13 +184,13 @@ const Login = () => {
 
             {/* Password Input with Forgot Password Link */}
             <View className="mb-6">
-              <View className="flex-row justify-between items-center mb-3">
-                <Text className="text-gray-900 font-semibold">Password</Text>
+              <View className="flex-row items-center justify-between mb-3">
+                <Text className="font-semibold text-gray-900">Password</Text>
                 <TouchableOpacity
-                  onPress={handleForgotPassword}
+                  onPress={() => router.push("/(auth)/forgetPassword")}
                   disabled={loading}
                 >
-                  <Text className="text-teal-700 font-semibold text-sm">
+                  <Text className="text-sm font-semibold text-teal-700">
                     Forgot Password?
                   </Text>
                 </TouchableOpacity>
@@ -221,7 +215,7 @@ const Login = () => {
                         onBlur={onBlur}
                         secureTextEntry={!showPassword}
                         editable={!loading}
-                        className="flex-1 text-gray-900 text-base"
+                        className="flex-1 text-base text-gray-900"
                       />
                       <TouchableOpacity
                         onPress={() => setShowPassword(!showPassword)}
@@ -253,14 +247,14 @@ const Login = () => {
               {loading ? (
                 <ActivityIndicator color="white" size="small" />
               ) : (
-                <Text className="text-white font-bold text-lg">Log In</Text>
+                <Text className="text-lg font-bold text-white">Log In</Text>
               )}
             </TouchableOpacity>
 
             {/* Divider */}
             <View className="flex-row items-center gap-3 mb-6">
               <View className="flex-1 h-px bg-gray-300" />
-              <Text className="text-gray-500 text-xs font-semibold tracking-wider uppercase">
+              <Text className="text-xs font-semibold tracking-wider text-gray-500 uppercase">
                 OR CONTINUE WITH
               </Text>
               <View className="flex-1 h-px bg-gray-300" />
@@ -276,7 +270,7 @@ const Login = () => {
                 activeOpacity={0.7}
               >
                 <Ionicons name="logo-google" size={18} color="#1f2937" />
-                <Text className="text-gray-900 font-semibold text-sm">
+                <Text className="text-sm font-semibold text-gray-900">
                   Google
                 </Text>
               </TouchableOpacity>
@@ -289,22 +283,22 @@ const Login = () => {
                 activeOpacity={0.7}
               >
                 <Ionicons name="logo-apple" size={18} color="#1f2937" />
-                <Text className="text-gray-900 font-semibold text-sm">
+                <Text className="text-sm font-semibold text-gray-900">
                   Apple
                 </Text>
               </TouchableOpacity>
             </View>
 
             {/* Sign Up Link */}
-            <View className="flex-row justify-center items-center gap-1">
-              <Text className="text-gray-700 text-center">
+            <View className="flex-row items-center justify-center gap-1">
+              <Text className="text-center text-gray-700">
                 New to ProLink?{" "}
               </Text>
               <TouchableOpacity
                 disabled={loading}
                 onPress={() => router.push("/(auth)/signup")}
               >
-                <Text className="text-teal-700 font-bold">
+                <Text className="font-bold text-teal-700">
                   Create an account
                 </Text>
               </TouchableOpacity>
@@ -315,7 +309,7 @@ const Login = () => {
           <View className="mx-4 mb-6">
             <View className="flex-row gap-3">
               <Ionicons name="shield-checkmark" size={20} color="#6b7280" />
-              <Text className="flex-1 text-gray-600 text-xs leading-5">
+              <Text className="flex-1 text-xs leading-5 text-gray-600">
                 Secured by architectural-grade encryption. Your professional
                 data is managed with the highest curation standards.
               </Text>
@@ -324,7 +318,7 @@ const Login = () => {
 
           {/* Footer */}
           <View className="px-6 py-4 border-t border-gray-200">
-            <Text className="text-center text-gray-500 text-xs tracking-wide uppercase">
+            <Text className="text-xs tracking-wide text-center text-gray-500 uppercase">
               © 2024 THE ARTISAN MARKETPLACE ARCHITECTURE
             </Text>
           </View>
