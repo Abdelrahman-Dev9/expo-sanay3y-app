@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import { z } from "zod";
 import { useVerifyCodeMutation } from "../src/services/authApi";
 import { RootState } from "../src/store/store";
+import { router } from "expo-router";
 
 // ✅ Validation
 const verifyEmailSchema = z.object({
@@ -82,6 +83,7 @@ const VerifyCodeScreen = ({ onBackPress, onVerifySuccess }: any) => {
 
       Alert.alert("Success", res.message);
       onVerifySuccess?.();
+      router.push("/(auth)/createNewPassword");
     } catch (error: any) {
       Alert.alert(
         "Verification Failed",
