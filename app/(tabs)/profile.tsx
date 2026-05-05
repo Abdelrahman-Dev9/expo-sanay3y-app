@@ -2,7 +2,7 @@ import { useClerk } from "@clerk/expo";
 import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
-export default function SettingsScreen() {
+const ProfileScreen = () => {
   const { signOut } = useClerk();
 
   const handleLogout = async () => {
@@ -21,14 +21,16 @@ export default function SettingsScreen() {
       <View>
         <Text>welcome user</Text>
       </View>
-      <View className="flex-1 items-center justify-center">
+      <View className="items-center justify-center flex-1">
         <TouchableOpacity
           onPress={handleLogout}
-          className="bg-red-500 px-6 py-3 rounded-full"
+          className="px-6 py-3 bg-red-500 rounded-full"
         >
-          <Text className="text-white font-bold">Logout</Text>
+          <Text className="font-bold text-white">Logout</Text>
         </TouchableOpacity>
       </View>
     </>
   );
-}
+};
+
+export default ProfileScreen;

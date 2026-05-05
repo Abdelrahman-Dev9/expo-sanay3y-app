@@ -78,10 +78,9 @@ const Login = () => {
         password: data.password,
       }).unwrap();
 
-      router.push("/(tabs)/second");
-
       console.log(res);
       Alert.alert(res.message || "Login successful");
+      router.push("/(tabs)/explore");
     } catch (err) {
       console.log(err);
       Alert.alert("Error", "Signup failed");
